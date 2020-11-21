@@ -12,9 +12,11 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	
 	//Menubar items.
 	JMenuBar menuBar;
-	JMenu File, About;
-	JMenuItem loadRoster, addAttendance, saveData, plotData;
+	JMenu File;
+	JMenuItem loadRoster, addAttendance, saveData, plotData, About;
 	
+	//Main window view.
+	MainViewWindow window = null;
 	/**
 	 * Default constructor.
 	 */
@@ -26,15 +28,19 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	 */
 	public MenuBar(MainViewWindow window)
 	{
+		//Assign window field.
+		this.window = window;
+		
 		//Create menu bar object.
 		menuBar = new JMenuBar();
 		
+		//Create menu bar items.
 		File = new JMenu("File");
 		File.addMenuListener(this);
 		menuBar.add(File);
 		
-		About = new JMenu("About");
-		About.addMenuListener(this);
+		About = new JMenuItem("About");
+		About.addActionListener(this);
 		menuBar.add(About);
 		
 		loadRoster = new JMenuItem("Load Roster");
@@ -78,6 +84,17 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		if(e.getSource().equals(plotData))
 		{
 			//Do something
+		}
+		
+		if(e.getSource().equals(About))
+		{
+			JOptionPane.showMessageDialog(window, "Version 1.0 "
+					+ "\n Created by: \nAlexander Gaouette\r\n"
+					+ "Matin Massoudi\r\n"
+					+ "David Ragipi\r\n"
+					+ "Orlando Rios\r\n"
+					+ "Cameron Woehler\r\n"
+					+ "");
 		}
 		
 	}
