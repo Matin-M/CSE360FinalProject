@@ -17,10 +17,12 @@ public class MainViewWindow extends JFrame{
 	 */
 	MainViewWindow()
 	{
-		MenuBar menuBar = new MenuBar();
-		add(menuBar);
+		setLayout(new FlowLayout());
+		//Add new elements here.
+		
 		pack();
 		setVisible(true);
+		
 	}
 	
 
@@ -31,7 +33,9 @@ public class MainViewWindow extends JFrame{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MainViewWindow window = new MainViewWindow();
-		window.setSize(400,300);
+		MenuBar menuBar = new MenuBar(window);
+		
+		window.setSize(500,500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		

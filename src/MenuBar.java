@@ -18,10 +18,14 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	/**
 	 * Default constructor.
 	 */
-	public MenuBar()
+	public MenuBar() {}
+	
+	/**
+	 * accept window argument and add JMenuBar.
+	 * @param window
+	 */
+	public MenuBar(MainViewWindow window)
 	{
-		setLayout(new FlowLayout());
-		
 		//Create menu bar object.
 		menuBar = new JMenuBar();
 		
@@ -49,13 +53,32 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		plotData.addActionListener(this);
 		File.add(plotData);
 		
-		this.setJMenuBar(menuBar);
+		window.setJMenuBar(menuBar);
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource().equals(loadRoster))
+		{
+			//Do something
+		}
+		
+		if(e.getSource().equals(addAttendance))
+		{
+			//Do something
+		}
+		
+		if(e.getSource().equals(saveData))
+		{
+			//Do something
+		}
+		
+		if(e.getSource().equals(plotData))
+		{
+			//Do something
+		}
 		
 	}
 
