@@ -3,7 +3,7 @@ import random
 asuID = 1210000000
 fNames = []
 lNames = []
-programs = ["Computer Science BS", "Computer Systems Engineering BSE"]
+programs = ["Computer Science", "Computer Systems Engineering"]
 ACADEMIC_LEVEL = "Undergrad"
 asurite = []
 
