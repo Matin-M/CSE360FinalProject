@@ -14,12 +14,12 @@ public class RosterManager extends JFrame {
 	
 	private JFileChooser chooser;
 	private FileFilter filter;
-	private HashMap<String, String[]> roster;
+	private HashMap<String, ArrayList<String>> roster;
 	
 	
 	RosterManager()
 	{
-		roster = new HashMap<String, String[]>();
+		roster = new HashMap<String, ArrayList<String>>();
 		chooser = new JFileChooser();
 		filter = new FileNameExtensionFilter("csv files", "csv");
 		chooser.addChoosableFileFilter(filter);
@@ -41,7 +41,7 @@ public class RosterManager extends JFrame {
 		    	BufferedReader bReader;
 		    	final String DELIMITER = ",";
 		    	String line, key;
-		    	String[] tempArr;
+		    	ArrayList<String> tempList;
 		    	
 		    	csvRoster = chooser.getSelectedFile();
 		    	fReader = new FileReader(csvRoster);
@@ -50,13 +50,16 @@ public class RosterManager extends JFrame {
 		    	line = "";
 	    		while ((line = bReader.readLine()) != null)
 	    		{
-	    			// Create an array of strings from the fields in the line
-	    			// delimited by commas	    			
-	    			tempArr = line.split(DELIMITER);
+					// Create an ArrayList of Strings to hold all data fields
+					// from the roster CSV file
+					tempList = new ArrayList<String>();
+					// Collections.addAll adds the array of strings created by
+					// the line.split operation into the ArrayList.
+	    			Collections.addAll(tempList, line.split(DELIMITER));
 	    			// asurite becomes the key to be used for updating
 	    			// attendance in the future
-	    			key = tempArr[5];
-	    			roster.put(key, tempArr);
+	    			key = tempList.get(5);
+	    			roster.put(key, tempList);
 	    		}
 	    		
 	    		bReader.close();
@@ -64,24 +67,24 @@ public class RosterManager extends JFrame {
 	    		
 	    		// This exists for testing purposes and to demonstrate how to 
 	    		// access items within the HashMap
-	    		for (Map.Entry<String, String[]> entry : roster.entrySet())
+	    		for (Map.Entry<String, ArrayList<String>> entry : roster.entrySet())
 	    		{
 	    			key = entry.getKey();
-	    			tempArr = entry.getValue();
+	    			tempList = entry.getValue();
 	    			
-	    			System.out.println(key + ": ");
-	    			for (int i = 0; i < tempArr.length; ++i)
+					System.out.println(key + ": ");
+	    			for (int i = 0; i < tempList.size(); ++i)
 	    			{
-	    				System.out.print(tempArr[i] + " ");
+	    				System.out.print(tempList.get(i) + " ");
 	    			}
 	    			System.out.println();
-	    		}
+				}
+				
 	    	}
 	    	catch (IOException ioe)
 	    	{
-	    		System.out.println(ioe.getLocalizedMessage());
+				System.out.println(ioe.getLocalizedMessage());
 	    	}
 	    }
-	    
 	}
 }
