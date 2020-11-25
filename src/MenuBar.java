@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import java.util.*;
+
 public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	
 	//Menubar items.
@@ -68,8 +70,10 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			RosterManager roster = new RosterManager();
-			roster.openFile();
+			RosterManager rosterManager = new RosterManager();
+			ArrayList<ArrayList<String>> roster = rosterManager.openFile();
+			DataTable table = new DataTable(window, roster);
+			
 		}
 		
 		if(e.getSource().equals(addAttendance))
