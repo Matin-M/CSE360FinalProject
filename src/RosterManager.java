@@ -14,12 +14,12 @@ public class RosterManager extends JFrame {
 	
 	private JFileChooser chooser;
 	private FileFilter filter;
-	private HashMap<String, ArrayList<String>> roster;
+	private ArrayList<ArrayList<String>> roster;
 	
 	
 	RosterManager()
 	{
-		roster = new HashMap<String, ArrayList<String>>();
+		roster = new ArrayList<ArrayList<String>>();
 		chooser = new JFileChooser();
 		filter = new FileNameExtensionFilter("csv files", "csv");
 		chooser.addChoosableFileFilter(filter);
@@ -28,7 +28,7 @@ public class RosterManager extends JFrame {
 		chooser.setVisible(true);
 	}
 	
-	public void openFile()
+	public ArrayList<ArrayList<String>> openFile()
 	{
 	    int returnVal = chooser.showOpenDialog(this);
 	    
@@ -40,7 +40,7 @@ public class RosterManager extends JFrame {
 		    	FileReader fReader;
 		    	BufferedReader bReader;
 		    	final String DELIMITER = ",";
-		    	String line, key;
+		    	String line;
 		    	ArrayList<String> tempList;
 		    	
 		    	csvRoster = chooser.getSelectedFile();
@@ -57,34 +57,21 @@ public class RosterManager extends JFrame {
 					// the line.split operation into the ArrayList.
 	    			Collections.addAll(tempList, line.split(DELIMITER));
 	    			// asurite becomes the key to be used for updating
-	    			// attendance in the future
-	    			key = tempList.get(5);
-	    			roster.put(key, tempList);
+	    			// attendance in the future;
+	    			roster.add(tempList);
 	    		}
 	    		
 	    		bReader.close();
 	    		fReader.close();
 	    		
-	    		// This exists for testing purposes and to demonstrate how to 
-	    		// access items within the HashMap
-	    		for (Map.Entry<String, ArrayList<String>> entry : roster.entrySet())
-	    		{
-	    			key = entry.getKey();
-	    			tempList = entry.getValue();
-	    			
-					System.out.println(key + ": ");
-	    			for (int i = 0; i < tempList.size(); ++i)
-	    			{
-	    				System.out.print(tempList.get(i) + " ");
-	    			}
-	    			System.out.println();
-				}
 				
 	    	}
 	    	catch (IOException ioe)
 	    	{
 				System.out.println(ioe.getLocalizedMessage());
 	    	}
-	    }
+		}
+		
+		return roster;
 	}
 }
