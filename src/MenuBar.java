@@ -68,7 +68,8 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			//Do something
+			RosterManager roster = new RosterManager();
+			roster.openFile();
 		}
 		
 		if(e.getSource().equals(addAttendance))
