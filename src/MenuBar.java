@@ -84,7 +84,8 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(plotData))
 		{
-			//Do something
+			DataPlotPanel plotPanel = new DataPlotPanel();
+			window.add(plotPanel);
 		}
 		
 		if(e.getSource().equals(About))
