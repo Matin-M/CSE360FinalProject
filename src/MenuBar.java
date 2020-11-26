@@ -90,6 +90,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(About))
 		{
+
 			JOptionPane.showMessageDialog(window, "Version 1.0 "
 					+ "\n Created by: \nAlexander Gaouette\r\n"
 					+ "Matin Massoudi\r\n"

@@ -15,7 +15,7 @@ public class MainViewWindow extends JFrame{
 	 */
 	MainViewWindow()
 	{
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout());
 		pack();
 		setVisible(true);
 	}
@@ -30,7 +30,7 @@ public class MainViewWindow extends JFrame{
 		MenuBar menuBar = new MenuBar(window);
 		
 		//Set window sizes.
-		window.setSize(500,500);
+		window.setSize(500,550);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		
