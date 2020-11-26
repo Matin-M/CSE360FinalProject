@@ -4,7 +4,7 @@ asuID = 1210000000
 fNames = []
 lNames = []
 PROGRAMS = ["Computer Science", "Computer Systems Engineering"]
-ACADEMIC_LEVEL = "Undergrad, Graduate"
+ACADEMIC_LEVEL = ["Undergrad", "Graduate"]
 asurite = []
 team = ["agaouette", "mmassoudi", "dragipi", "orios", "cwoehler"]
 
