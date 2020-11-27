@@ -1,6 +1,6 @@
 ## CSE 360 Final Project
 
-#Final Project for CSE 360, written in Java using AWT and JFreeChart.
+Final Project for CSE 360, written in Java using AWT and JFreeChart.
 
 Created By:
   Matin Massoudi
