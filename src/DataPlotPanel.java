@@ -1,13 +1,12 @@
-import javax.swing.JPanel;
-import java.awt.Color;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import javax.swing.*;
+import java.awt.*;
 
 
 public class DataPlotPanel extends JPanel {
@@ -56,6 +55,7 @@ public class DataPlotPanel extends JPanel {
 		
 		//Add chartpanel to JPanel.
 		add(panel);
+		
 	}
 	
 	/**

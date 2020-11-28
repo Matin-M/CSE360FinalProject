@@ -12,7 +12,9 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	JMenuBar menuBar;
 	JMenu File;
 	JMenuItem loadRoster, addAttendance, saveData, plotData, About;
-	
+	RosterManager rosterManager;
+	DataTable table;
+	DataPlotPanel plotPanel;
 	//Main window view.
 	MainViewWindow window = null;
 	/**
@@ -66,11 +68,32 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			RosterManager rosterManager = new RosterManager();
-			ArrayList<ArrayList<String>> roster = rosterManager.openFile();
-			DataTable table = new DataTable(window, roster);
+			rosterManager = new RosterManager();
+			rosterManager.openFile();
+			ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
+			table = new DataTable(window, roster);
+			if(plotPanel.isVisible()) {
+				plotPanel.setVisible(false);
+			}
+			window.setVisible(true);
 			
 		}
+		
+		if(e.getSource().equals(addAttendance))
+		{
+			if (rosterManager != null)
+			{
+				rosterManager.addAttendance();
+				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
+				table = new DataTable(window, roster);
+			}
+			else
+			{
+				// We need a dialog box that roster has not been loaded yet
+				System.out.println("Roster has not been loaded");
+			}
+		}
+
 		
 		if(e.getSource().equals(addAttendance))
 		{
@@ -85,12 +108,20 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		if(e.getSource().equals(plotData))
 		{
 			//This adds an example graph using test data provided.
-			DataPlotPanel plotPanel = new DataPlotPanel("Val1","Val2");
+			plotPanel = new DataPlotPanel("Val1","Val2");
 			plotPanel.createTestDataset();
 			plotPanel.addData("Val1", 2.3, 1.2);
 			plotPanel.addData("Val1", 12, 13);
 			plotPanel.addData("Val1", 1, 9);
 			plotPanel.createPlotPanel();
+			
+			if(table != null && table.isVisible()) {
+				System.out.println("dfsadffssdf");
+				
+				window.dispose();
+				window.setVisible(false);
+			}
+			
 			window.add(plotPanel);
 			window.setVisible(true);
 		}
