@@ -12,6 +12,12 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	JMenuBar menuBar;
 	JMenu File;
 	JMenuItem loadRoster, addAttendance, saveData, plotData, About;
+
+	// Roster Manager and DataTable need to be class scope for now until we get
+	// ActionListener implemented
+	RosterManager rosterManager;
+	AttendanceManager attendanceManager;
+	DataTable table;
 	
 	//Main window view.
 	MainViewWindow window = null;
@@ -66,15 +72,34 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			RosterManager rosterManager = new RosterManager();
-			ArrayList<ArrayList<String>> roster = rosterManager.openFile();
-			DataTable table = new DataTable(window, roster);
+			if(rosterManager != null) 
+			{
+				rosterManager = new RosterManager();
+				rosterManager.openFile();
+				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
+				table = new DataTable(window, roster);
+			}
+			else {
+				// We need a dialog box that roster has not been loaded yet
+				System.out.println("Roster has not been loaded");
+			}
+			
 			
 		}
 		
 		if(e.getSource().equals(addAttendance))
 		{
-			//Do something
+			if (attendanceManager != null)
+			{
+				attendanceManager.openAttendanceFile();;
+				ArrayList<ArrayList<String>> attendanceRoster = attendanceManager.getAttendanceRoster();
+				table = new DataTable(window, attendanceRoster);
+			}
+			else
+			{
+				// We need a dialog box that roster has not been loaded yet
+				System.out.println("Roster has not been loaded");
+			}
 		}
 		
 		if(e.getSource().equals(saveData))
@@ -84,14 +109,8 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(plotData))
 		{
-			//This adds an example graph using test data provided.
-			DataPlotPanel plotPanel = new DataPlotPanel("Val1","Val2");
-			plotPanel.createTestDataset();
-			plotPanel.addData("Val1", 2.3, 1.2);
-			plotPanel.addData("Val1", 12, 13);
-			plotPanel.addData("Val1", 1, 9);
-			plotPanel.createPlotPanel();
-			window.add(plotPanel);
+			//DataPlotPanel plotPanel = new DataPlotPanel();
+			//window.add(plotPanel);
 		}
 		
 		if(e.getSource().equals(About))
