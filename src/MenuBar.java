@@ -12,9 +12,13 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	JMenuBar menuBar;
 	JMenu File;
 	JMenuItem loadRoster, addAttendance, saveData, plotData, About;
+
+	// Roster Manager and DataTable need to be class scope for now until we get
+	// ActionListener implemented
 	RosterManager rosterManager;
+	AttendanceManager attendanceManager;
 	DataTable table;
-	DataPlotPanel plotPanel;
+	
 	//Main window view.
 	MainViewWindow window = null;
 	/**
@@ -68,36 +72,34 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			rosterManager = new RosterManager();
-			rosterManager.openFile();
-			ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
-			table = new DataTable(window, roster);
-			if(plotPanel.isVisible()) {
-				plotPanel.setVisible(false);
+			if(rosterManager != null) 
+			{
+				rosterManager = new RosterManager();
+				rosterManager.openFile();
+				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
+				table = new DataTable(window, roster);
 			}
-			window.setVisible(true);
+			else {
+				// We need a dialog box that roster has not been loaded yet
+				System.out.println("Roster has not been loaded");
+			}
+			
 			
 		}
 		
 		if(e.getSource().equals(addAttendance))
 		{
-			if (rosterManager != null)
+			if (attendanceManager != null)
 			{
-				rosterManager.addAttendance();
-				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
-				table = new DataTable(window, roster);
+				attendanceManager.openAttendanceFile();;
+				ArrayList<ArrayList<String>> attendanceRoster = attendanceManager.getAttendanceRoster();
+				table = new DataTable(window, attendanceRoster);
 			}
 			else
 			{
 				// We need a dialog box that roster has not been loaded yet
 				System.out.println("Roster has not been loaded");
 			}
-		}
-
-		
-		if(e.getSource().equals(addAttendance))
-		{
-			//Do something
 		}
 		
 		if(e.getSource().equals(saveData))
@@ -107,23 +109,8 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(plotData))
 		{
-			//This adds an example graph using test data provided.
-			plotPanel = new DataPlotPanel("Val1","Val2");
-			plotPanel.createTestDataset();
-			plotPanel.addData("Val1", 2.3, 1.2);
-			plotPanel.addData("Val1", 12, 13);
-			plotPanel.addData("Val1", 1, 9);
-			plotPanel.createPlotPanel();
-			
-			if(table != null && table.isVisible()) {
-				System.out.println("dfsadffssdf");
-				
-				window.dispose();
-				window.setVisible(false);
-			}
-			
-			window.add(plotPanel);
-			window.setVisible(true);
+			//DataPlotPanel plotPanel = new DataPlotPanel();
+			//window.add(plotPanel);
 		}
 		
 		if(e.getSource().equals(About))
