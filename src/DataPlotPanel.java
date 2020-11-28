@@ -7,6 +7,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class DataPlotPanel extends JPanel {
@@ -20,23 +21,19 @@ public class DataPlotPanel extends JPanel {
 	XYPlot plot;
 	
 	//Data
-	String dataset1Name;
-	String dataset2Name;
-	XYSeries series1;
-	XYSeries series2;
+	ArrayList<XYSeries> dataSeries; 
 
 	/**
-	 * Initialize datasets with names dataset1Name, dataset2Name
+	 * Initialize datasets with names of dates.
 	 * @param dataset1Name
 	 * @param dataset2Name
 	 */
-	public DataPlotPanel(String dataset1Name, String dataset2Name) {
-		//Initialize class variables.
-		this.dataset1Name = dataset1Name;
-		this.dataset2Name = dataset2Name;
+	public DataPlotPanel(ArrayList<String> dates) {
 		dataset = new XYSeriesCollection();
-		series1 = new XYSeries(dataset1Name);
-		series2 = new XYSeries(dataset2Name);  
+		for(int i = 0; i < dataSeries.size(); i++) 
+		{
+			dataSeries.add(new XYSeries(dates.get(i)));
+		}
 	}
 	
 	/**
@@ -45,8 +42,10 @@ public class DataPlotPanel extends JPanel {
 	 */
 	public void createPlotPanel()
 	{
-		dataset.addSeries(series1);
-		dataset.addSeries(series2); 
+		for (int i = 0; i  < dataSeries.size(); i++) 
+		{
+			dataset.addSeries(dataSeries.get(i));
+		}
 		chart = ChartFactory.createScatterPlot
 				("Attendance Graph", "% of Attendance", "# of students", dataset);
 		plot = (XYPlot)chart.getPlot();
@@ -55,33 +54,32 @@ public class DataPlotPanel extends JPanel {
 		
 		//Add chartpanel to JPanel.
 		add(panel);
-		
 	}
 	
 	/**
-	 * addData adds a single pair of values to either dataset1 or dataset 2.
+	 * Adds data to a specific dataset.
 	 * 
 	 * @param whichDataset
 	 * @param val1
 	 * @param val2
 	 */
 	public void addData(String whichDataset, double val1, double val2)
-	{
-		if(whichDataset.equals(dataset1Name))
+	{	
+		for (int i = 0; i < dataSeries.size(); i++) 
 		{
-			series1.add(val1, val2);
+			if(whichDataset.equals(dataSeries.get(i)))
+			{
+				dataSeries.get(i).add(val1, val2);
+				return;
+			}
 		}
-		else if(whichDataset.equals(dataset2Name))
-		{
-			series2.add(val1, val2);
-		}else {
-			System.err.println("Invalid dataset name!");
-		}
+		
+		System.err.println("Could not find dataset!");
 	}
 
 	/**
 	 * This method is used to demonstrate adding data to the graph.
-	 */
+	 
 	public void createTestDataset() {
 		// TODO Auto-generated method stub
 	    series1.add(1, 72.9);  
@@ -107,5 +105,7 @@ public class DataPlotPanel extends JPanel {
 	    series2.add(10, 123.4);  
 	   
 	}
+	
+	 */
 
 }
