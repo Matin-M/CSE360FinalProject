@@ -5,10 +5,14 @@ import javax.swing.event.TableModelListener;
 import java.awt.Dimension;
 
 public class DataTable extends JPanel implements TableModelListener {
+
+    DataTableModel model;
+    
     
     DataTable(MainViewWindow window, ArrayList<ArrayList<String>> roster)
     {
-        JTable table = new JTable(new DataTableModel(roster));
+        model = new DataTableModel(roster);
+        JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumn("Program").setPreferredWidth(200);
@@ -22,8 +26,16 @@ public class DataTable extends JPanel implements TableModelListener {
             scrollPane.setPreferredSize(newSize);
             scrollPane.setMinimumSize(newSize);
     }
-
+        model.addTableModelListener(this);
         window.add(scrollPane);
+
+        
+        
+    }
+
+    public void addData(ArrayList<ArrayList<String>> attendance)
+    {
+        model.appendData(attendance);
         
     }
 

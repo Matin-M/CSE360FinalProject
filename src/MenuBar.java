@@ -17,6 +17,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	// ActionListener implemented
 	RosterManager rosterManager;
 	AttendanceManager attendanceManager;
+	ArrayList<ArrayList<String>> roster;
 	DataTable table;
 	
 	//Main window view.
@@ -72,28 +73,24 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
-			if(rosterManager != null) 
-			{
 				rosterManager = new RosterManager();
 				rosterManager.openFile();
-				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
+				roster = rosterManager.getRoster();
 				table = new DataTable(window, roster);
-			}
-			else {
-				// We need a dialog box that roster has not been loaded yet
-				System.out.println("Roster has not been loaded");
-			}
-			
 			
 		}
 		
 		if(e.getSource().equals(addAttendance))
 		{
-			if (attendanceManager != null)
+			
+			if (rosterManager != null)
 			{
-				attendanceManager.openAttendanceFile();;
-				ArrayList<ArrayList<String>> attendanceRoster = attendanceManager.getAttendanceRoster();
-				table = new DataTable(window, attendanceRoster);
+
+				attendanceManager = new AttendanceManager();
+				attendanceManager.openAttendanceFile(roster);
+				roster = attendanceManager.getAttendanceRoster();
+				table.addData(roster);
+				
 			}
 			else
 			{
