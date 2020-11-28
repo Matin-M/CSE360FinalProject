@@ -34,7 +34,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 	{
 		//Assign window field.
 		this.window = window;
-		
+	
 		//Create menu bar object.
 		menuBar = new JMenuBar();
 		
@@ -46,6 +46,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		About = new JMenuItem("About");
 		About.addActionListener(this);
 		menuBar.add(About);
+		
 		
 		loadRoster = new JMenuItem("Load Roster");
 		loadRoster.addActionListener(this);
@@ -72,6 +73,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
+			/*
 			if(rosterManager != null) 
 			{
 				rosterManager = new RosterManager();
@@ -79,11 +81,13 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 				ArrayList<ArrayList<String>> roster = rosterManager.getRoster();
 				table = new DataTable(window, roster);
 			}
+			*/
+			/*
 			else {
 				// We need a dialog box that roster has not been loaded yet
 				System.out.println("Roster has not been loaded");
 			}
-			
+			*/
 			
 		}
 		
@@ -109,8 +113,15 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(plotData))
 		{
-			//DataPlotPanel plotPanel = new DataPlotPanel();
-			//window.add(plotPanel);
+			JFrame plotFrame = new JFrame();
+			DataPlotPanel plotPanel = new DataPlotPanel("DS1","DS2");
+            plotPanel.createTestDataset();
+            plotPanel.createPlotPanel();
+            //window.add(plotPanel);
+            //window.setVisible(true);
+            plotFrame.add(plotPanel);
+            plotFrame.setSize(700,500);
+            plotFrame.setVisible(true);
 		}
 		
 		if(e.getSource().equals(About))
