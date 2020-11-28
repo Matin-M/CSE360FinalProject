@@ -55,7 +55,6 @@ public class DataPlotPanel extends JPanel {
 		
 		//Add chartpanel to JPanel.
 		add(panel);
-		
 	}
 	
 	/**
