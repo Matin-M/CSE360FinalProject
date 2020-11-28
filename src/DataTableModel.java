@@ -4,15 +4,13 @@ import javax.swing.table.AbstractTableModel;
 
 public class DataTableModel extends AbstractTableModel {
 
-    ArrayList<ArrayList<String>> data;
+    List<ArrayList<String>> data;
     ArrayList<String> columns;
 
     DataTableModel(ArrayList<ArrayList<String>> roster)
     {
-        data = roster;
-        String[] temp = {"ID", "First Name", "Last Name", "Program", "Level", "ASURITE"};
-        columns = new ArrayList<String>();
-        Collections.addAll(columns, temp);
+        data = roster.subList(1, roster.size());
+        columns = roster.get(0);
     }
     
 
@@ -40,7 +38,16 @@ public class DataTableModel extends AbstractTableModel {
         return data.get(rowIndex).get(columnIndex);
     }
 
-    
+    public void appendData(ArrayList<ArrayList<String>> attendance)
+    {
+        int endIndex = attendance.get(0).size() - 1;
+        columns.add(attendance.get(0).get(endIndex));
+        for (int i = 1; i < data.size(); ++i)
+        {
+            data.get(i).add(attendance.get(i).get(endIndex));
+        }
+        fireTableStructureChanged();
+    }
     
 
 }

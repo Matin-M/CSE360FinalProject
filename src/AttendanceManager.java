@@ -4,6 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.Random;
 
 public class AttendanceManager extends JFrame {
 	
@@ -12,14 +13,14 @@ public class AttendanceManager extends JFrame {
 	private ArrayList<ArrayList<String>> attendanceRoster;
 
 	public AttendanceManager() {
-		attendanceRoster = new ArrayList<ArrayList<String>>();
 		chooser = new JFileChooser();
 		filter = new FileNameExtensionFilter("csv files", "csv");
 		chooser.addChoosableFileFilter(filter);
 	}
 	
-	public void openAttendanceFile()
+	public void openAttendanceFile(ArrayList<ArrayList<String>> roster)
 	{
+		attendanceRoster = roster;
 		chooser.setDialogTitle("Choose a file");
 		this.getContentPane().add(chooser);
 		chooser.setVisible(true);
@@ -35,21 +36,25 @@ public class AttendanceManager extends JFrame {
 		    	final String DELIMITER = ",";
 		    	String line, date;
 				String[] tempArr;
-				int loc, i, rowSize, columnSize;
+				int loc, i, rowSize, columnSize, tempDate;
 				boolean found;
 		    	
 		    	attendance = chooser.getSelectedFile();
 		    	fReader = new FileReader(attendance);
 				bReader = new BufferedReader(fReader);
 				// Add the new column. We need a date picker for this
-				attendanceRoster.get(0).add("November 26");
+				Random test = new Random();
+				tempDate = test.nextInt(30) + 1;
+				attendanceRoster.get(0).add("November " + tempDate);
 				columnSize = attendanceRoster.get(0).size();
 				
 				// All students start at zero minutes of attendance
 				for (i = 1; i < attendanceRoster.size(); ++i)
 				{
 					attendanceRoster.get(i).add("0");
+					
 				}
+				
 
 				line = "";
 	    		while ((line = bReader.readLine()) != null)
