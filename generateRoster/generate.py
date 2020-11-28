@@ -22,7 +22,7 @@ if numStudents > 0 and numStudents < 301:
     lnameFile.close()
 
     roster = open("roster.csv", "w")
-    for i in range(0, numStudents + 1):
+    for i in range(0, numStudents):
         addID = asuID + random.randint(0, 10000000)
         randomFirst = random.choice(fNames)
         randomLast =  random.choice(lNames)
@@ -38,25 +38,36 @@ if numStudents > 0 and numStudents < 301:
         roster.write(str(addID) + "," + randomFirst + "," + randomLast + "," + program + "," + level + "," + asurite[i] + "\n")
     roster.close()
 
-    attendance = open("attendance.csv", "w")
-    for student in asurite:
-        # Check if asurite contains a number if it does we'll make them connect
-        # multiple times, they'll connect between 1-5 times for a maximum of
-        # 75 minutes
-        if any(map(str.isdigit, student)):
-           bound = random.randint(1, 5)
-           for i in range (1, bound):
-               time = random.randint(1, 15)
-               attendance.write(student + "," + str(time) + "\n")
-        else:
+    numAttendanceFiles = int(input("How many attendance CSV files should I generate? (1-10): "))
+    visitors = (input("Add visitors to classroom? (yes/no): "))
+    if visitors == "yes":
+        response = True
+    elif visitors == "no":
+        response = False
+    else:
+        print("Response must be yes or no. Not adding visitors.")
+        response = False
+
+    while (numAttendanceFiles < 11 and numAttendanceFiles > 0):
+        filename = "attendance" + str(numAttendanceFiles) + ".csv"
+        attendance = open(filename, "w")
+        for student in asurite:
+            # Check if asurite contains a number if it does we'll make them connect
+            # multiple times, they'll connect between 1-5 times for a maximum of
+            # 75 minutes
+            if any(map(str.isdigit, student)):
+                bound = random.randint(1, 5)
+                for i in range (1, bound):
+                    time = random.randint(1, 15)
+                    attendance.write(student + "," + str(time) + "\n")
+            else:
+                time = random.randint(1, 75)
+                attendance.write(student + "," + str(time) + "\n")
+
+        if response == True:
+            # One of us is in the wrong class
+            visitor = random.choice(team)
             time = random.randint(1, 75)
-            attendance.write(student + "," + str(time) + "\n")
-
-    flip = random.randint(0,1)
-    if flip == 1:
-        # One of us is in the wrong class
-        visitor = random.choice(team)
-        time = random.randint(1, 75)
-        attendance.write(visitor + "," + str(time) + "\n")
-
-    attendance.close()
+            attendance.write(visitor + "," + str(time) + "\n")
+        attendance.close()
+        numAttendanceFiles -= 1
