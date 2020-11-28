@@ -33,9 +33,9 @@ public class DataTable extends JPanel implements TableModelListener {
         
     }
 
-    public void addData(ArrayList<ArrayList<String>> attendance)
+    public void update()
     {
-        model.appendData(attendance);
+        model.updateTable();
         
     }
 
