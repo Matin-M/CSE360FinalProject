@@ -4,7 +4,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.awt.Dimension;
 
-public class DataTable implements TableModelListener{
+public class DataTable extends JPanel implements TableModelListener {
     
     DataTable(MainViewWindow window, ArrayList<ArrayList<String>> roster)
     {
@@ -24,14 +24,13 @@ public class DataTable implements TableModelListener{
     }
 
         window.add(scrollPane);
-        window.setVisible(true);
         
     }
 
     @Override
     public void tableChanged(TableModelEvent e)
     {
-
+    	
     }
 
 }
