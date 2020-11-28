@@ -92,6 +92,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 			plotPanel.addData("Val1", 1, 9);
 			plotPanel.createPlotPanel();
 			window.add(plotPanel);
+			window.setVisible(true);
 		}
 		
 		if(e.getSource().equals(About))

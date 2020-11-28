@@ -30,10 +30,10 @@ public class MainViewWindow extends JFrame{
 		MenuBar menuBar = new MenuBar(window);
 		
 		//Set window sizes.
-		window.setSize(500,550);
+		window.setSize(700,600);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
-		
+		 
 	}
 
 }
