@@ -88,8 +88,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 
 				attendanceManager = new AttendanceManager();
 				attendanceManager.openAttendanceFile(roster);
-				roster = attendanceManager.getAttendanceRoster();
-				table.addData(roster);
+				table.update();
 				
 			}
 			else

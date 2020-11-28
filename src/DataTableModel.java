@@ -38,16 +38,11 @@ public class DataTableModel extends AbstractTableModel {
         return data.get(rowIndex).get(columnIndex);
     }
 
-    public void appendData(ArrayList<ArrayList<String>> attendance)
+    public void updateTable()
     {
-        int endIndex = attendance.get(0).size() - 1;
-        columns.add(attendance.get(0).get(endIndex));
-        for (int i = 1; i < data.size(); ++i)
-        {
-            data.get(i).add(attendance.get(i).get(endIndex));
-        }
         fireTableStructureChanged();
     }
     
 
 }
+
