@@ -104,22 +104,15 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		if(e.getSource().equals(saveData))
 		{
-			//Do something
+			if (rosterManager != null)
+			{
+				rosterManager.exportRoster();
+			}
 		}
 		
 		if(e.getSource().equals(plotData))
 		{
-			JFrame plotFrame = new JFrame();
-			/*
-			DataPlotPanel plotPanel = new DataPlotPanel("DS1","DS2");
-            plotPanel.createTestDataset();
-            plotPanel.createPlotPanel();
-            //window.add(plotPanel);
-            //window.setVisible(true);
-            plotFrame.add(plotPanel);
-            plotFrame.setSize(700,500);
-            plotFrame.setVisible(true);
-            */
+      //To be implemented by Matin.
 		}
 		
 		if(e.getSource().equals(About))
