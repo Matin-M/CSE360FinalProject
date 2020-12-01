@@ -7,13 +7,15 @@ import java.awt.Dimension;
 public class DataTable extends JPanel implements TableModelListener {
 
     DataTableModel model;
-    
+    JScrollPane scrollPane;
+    MainViewWindow window;
     
     DataTable(MainViewWindow window, ArrayList<ArrayList<String>> roster)
     {
+        this.window = window;
         model = new DataTableModel(roster);
         JTable table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane = new JScrollPane(table);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumn("Program").setPreferredWidth(200);
         table.getColumn("ID").setPreferredWidth(95);
@@ -37,6 +39,14 @@ public class DataTable extends JPanel implements TableModelListener {
     {
         model.updateTable();
         
+    }
+
+    public void clearTable()
+    {
+        model.deleteAll();
+        scrollPane.setEnabled(false);
+        scrollPane.remove(this);
+        window.remove(scrollPane);
     }
 
     @Override

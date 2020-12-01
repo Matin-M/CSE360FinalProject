@@ -38,6 +38,13 @@ public class DataTableModel extends AbstractTableModel {
         return data.get(rowIndex).get(columnIndex);
     }
 
+    public void deleteAll()
+    {
+        data.clear();
+        columns.clear();
+        fireTableStructureChanged();
+    }
+
     public void updateTable()
     {
         fireTableStructureChanged();
