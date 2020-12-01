@@ -119,7 +119,7 @@ public class RosterManager extends JFrame {
 						}
 					}
 
-					if (i != roster.get(0).size() - 1)
+					if (i != roster.size() - 1)
 					{
 						writer.write("\n");
 					}
