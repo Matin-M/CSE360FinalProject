@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -126,8 +127,9 @@ public class RosterManager extends JFrame {
 										
 				}
 				writer.close();
-				// Maybe have this make a dialog box
-				System.out.println("Roster succesfully exported");
+				
+				String label = "The file " + csvExport.getName() + " has been saved!";
+				JOptionPane.showMessageDialog(null, label);
 			}
 
 			catch (IOException ioe)
