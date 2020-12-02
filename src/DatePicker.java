@@ -43,7 +43,7 @@ public class DatePicker{
 						menubar.attendanceManager.openAttendanceFile(menubar.roster, date);
 						menubar.table.update();
 						frame.dispose();
-					}
+					      }
                 });
                 
                 //Instantiate JPanel for button.
