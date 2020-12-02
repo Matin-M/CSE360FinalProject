@@ -21,6 +21,7 @@ public class MenuBar extends JFrame implements ActionListener{
 	AttendanceManager attendanceManager;
 	ArrayList<ArrayList<String>> roster;
 	DataTable table;
+	String date;
 	
 	//Main window view.
 	MainViewWindow window = null;
@@ -106,15 +107,10 @@ public class MenuBar extends JFrame implements ActionListener{
 		
 		if(e.getSource().equals(addAttendance))
 		{
-			System.out.println("hello");
 			if (rosterManager != null)
 			{
-				
-				DateWindow date = new DateWindow();
-				attendanceManager = new AttendanceManager();
-				attendanceManager.openAttendanceFile(roster);
-				table.update();
-				
+				//Create a datepicker object that handles attendance.
+				DatePicker datePicker = new DatePicker(this);	
 			}
 			else
 			{
