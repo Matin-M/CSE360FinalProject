@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
-
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
@@ -35,10 +34,10 @@ public class DatePicker{
             public void run() {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                    ex.printStackTrace();
+                } catch (Exception e) {
+                	System.err.println("An error with JDatePicker occurred!");
+                    e.printStackTrace();
                 }
-
                 JFrame frame = new JFrame("Attendance Date");
                 button = new JButton("OK");
                 button.addActionListener(new ActionListener() {
@@ -52,10 +51,12 @@ public class DatePicker{
 						menubar.table.update();
 						frame.dispose();
 					}
-                	
                 });
+                
+                //Instantiate JPanel for button.
                 JPanel buttonPane = new JPanel();
                 
+                //Configure JFrame.
                 buttonPane.setLayout(new FlowLayout());
                 buttonPane.add(button);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +64,6 @@ public class DatePicker{
                 frame.add(new DatePane(),BorderLayout.PAGE_START);
                 frame.add(buttonPane, BorderLayout.PAGE_END);
                 frame.pack();
-                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
                 
             }
@@ -73,7 +73,7 @@ public class DatePicker{
     public class DatePane extends JPanel {
 
     	/**
-    	 * 
+    	 * DatePane constructor.
     	 */
         public DatePane() {
             model = new UtilDateModel();
@@ -89,7 +89,11 @@ public class DatePicker{
         }
 
     }
-
+    /**
+     * 
+     * DateLabelFormatter implementation used from CodeJava.com.
+     *
+     */
     public class DateLabelFormatter extends AbstractFormatter {
 
         private String datePattern = "yyyy-MM-dd";
@@ -111,8 +115,13 @@ public class DatePicker{
         }
 
     }
+    
+    /**
+     * getDate returns a string.
+     * @return
+     */
     String getDate() {
-    	return String.valueOf(model.getDay()) +  String.valueOf(model.getMonth()) + String.valueOf(model.getYear());
+    	return String.valueOf(model.getDay()) + "/" + String.valueOf(model.getMonth());
     }
     
 }
