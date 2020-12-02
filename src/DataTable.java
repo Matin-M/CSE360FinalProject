@@ -9,36 +9,42 @@ public class DataTable extends JPanel implements TableModelListener {
     DataTableModel model;
     JScrollPane scrollPane;
     MainViewWindow window;
+    JTable table;
     
     DataTable(MainViewWindow window, ArrayList<ArrayList<String>> roster)
     {
         this.window = window;
         model = new DataTableModel(roster);
-        JTable table = new JTable(model);
+        table = new JTable(model);
         scrollPane = new JScrollPane(table);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumn("Program").setPreferredWidth(200);
-        table.getColumn("ID").setPreferredWidth(95);
         Dimension newSize = new Dimension(600,500);
-        if(scrollPane != null) {
-            scrollPane.getViewport().setSize(newSize);
-            scrollPane.getViewport().setPreferredSize(newSize);
-            scrollPane.getViewport().setMinimumSize(newSize);
-            scrollPane.setSize(newSize);
-            scrollPane.setPreferredSize(newSize);
-            scrollPane.setMinimumSize(newSize);
-    }
+        scrollPane.setPreferredSize(newSize);
+
+        this.setColumnWidths();
         model.addTableModelListener(this);
         window.add(scrollPane);
+        // ScrollPane fits to window
+        window.pack();
+        
+    }
 
-        
-        
+    public void setColumnWidths()
+    {
+        int count = table.getColumnCount();
+        for (int i = 0; i < count; ++i)
+        {
+            String name = table.getColumnName(i);
+            table.getColumn(name).setPreferredWidth(100);
+        }
+
+        table.getColumn("Program").setPreferredWidth(200);
     }
 
     public void update()
     {
         model.updateTable();
-        
+        this.setColumnWidths();
     }
 
     public void clearTable()
