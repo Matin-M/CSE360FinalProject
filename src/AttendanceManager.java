@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.Random;
@@ -37,6 +38,8 @@ public class AttendanceManager extends JFrame {
 		    	String line, date;
 				String[] tempArr;
 				int loc, i, rowSize, columnSize, tempDate;
+				ArrayList<String> students = new ArrayList<String>();
+				ArrayList<String[]> visitors = new ArrayList<String[]>();
 				boolean found;
 		    	
 		    	attendance = chooser.getSelectedFile();
@@ -70,9 +73,16 @@ public class AttendanceManager extends JFrame {
 
 					while (found != true && i != attendanceRoster.size())
 					{
+						String asurite = attendanceRoster.get(i).get(5);
 						// asurite matches
-						if (tempArr[0].equals(attendanceRoster.get(i).get(5)))
+						if (tempArr[0].equals(asurite))
 						{
+							// Keep track of which students are added from
+							// attendance file
+							if (students.contains(asurite) == false)
+							{
+								students.add(asurite);
+							}
 							found = true;
 							int currentVal = Integer.parseInt(attendanceRoster.get(i).get(columnSize - 1));
 							currentVal += Integer.parseInt(tempArr[1]);
@@ -80,10 +90,37 @@ public class AttendanceManager extends JFrame {
 							attendanceRoster.get(i).set(columnSize - 1, updated);
 						}
 						++i;
-					}  			
+					}
+					// Visitor is in classroom
+					if (found == false)
+					{
+						visitors.add(tempArr);
+					}
 	    		}
 	    		bReader.close();
 				fReader.close();
+
+				String label = "";
+
+				label += "Attendance data added for " + students.size() + " student(s)\n";
+				if (visitors.size() != 0)
+				{	
+					if (visitors.size() == 1)
+					{
+						label += visitors.size() + " additional attendee was found:\n\n";
+						label += visitors.get(0)[0] + " connected for " + visitors.get(0)[1] + " minute(s)\n";
+					}
+					else
+					{
+						label += visitors.size() + " additional attendees were found:\n\n";
+						for (int j = 0; j < visitors.size(); ++j)
+						{
+							label += visitors.get(j)[0] + " connected for " + visitors.get(j)[1] + " minute(s)\n";
+						}
+					}
+				}
+
+				JOptionPane.showMessageDialog(null, label);
 				
 	    	}
 	    	catch (IOException ioe)
@@ -92,11 +129,4 @@ public class AttendanceManager extends JFrame {
 			}
 		}
 	}
-	
-
-	public ArrayList<ArrayList<String>> getAttendanceRoster() {
-		// TODO Auto-generated method stub
-		return attendanceRoster;
-	}
-
 }
