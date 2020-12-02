@@ -1,13 +1,13 @@
-/**
- * MainViewWindow.java creates canvas and aggregates all the views.
- * 
- *
- */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * The MainViewWindow class initializes a JFrame to be used by all other UI elements.
+ *
+ */
 public class MainViewWindow extends JFrame{
 	
 	/**
@@ -15,6 +15,7 @@ public class MainViewWindow extends JFrame{
 	 */
 	MainViewWindow()
 	{
+		//Set layout to borderlayout.
 		setLayout(new BorderLayout());
 		pack();
 		setVisible(true);
