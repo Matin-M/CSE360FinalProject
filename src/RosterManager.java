@@ -91,4 +91,50 @@ public class RosterManager extends JFrame {
 	{
 		return roster;
 	}
+
+	public void exportRoster()
+	{
+		chooser.setDialogTitle("Choose where to save file");
+		this.getContentPane().add(chooser);
+		chooser.setVisible(true);
+		int returnVal = chooser.showSaveDialog(this);
+		
+		if (returnVal == JFileChooser.APPROVE_OPTION)
+		{
+			try 
+	    	{
+				File csvExport;
+				csvExport = chooser.getSelectedFile();
+				BufferedWriter writer = new BufferedWriter(new PrintWriter(csvExport));
+
+
+				for (int i = 0; i < roster.size(); ++i)
+				{
+					for (int j = 0; j < roster.get(0).size(); ++j)
+					{
+						writer.write(roster.get(i).get(j));
+						if (j != roster.get(0).size() - 1)
+						{
+							writer.write(",");
+						}
+					}
+
+					if (i != roster.size() - 1)
+					{
+						writer.write("\n");
+					}
+										
+				}
+				writer.close();
+				// Maybe have this make a dialog box
+				System.out.println("Roster succesfully exported");
+			}
+
+			catch (IOException ioe)
+	    	{
+				System.out.println(ioe.getLocalizedMessage());
+	    	}
+		}
+
+	}
 }

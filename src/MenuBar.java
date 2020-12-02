@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
-public class MenuBar extends JFrame implements MenuListener, ActionListener{
+public class MenuBar extends JFrame implements ActionListener{
 	
 	//Menubar items.
 	JMenuBar menuBar;
@@ -41,7 +43,7 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		
 		//Create menu bar items.
 		File = new JMenu("File");
-		File.addMenuListener(this);
+		File.addActionListener(this);
 		menuBar.add(File);
 		
 		About = new JMenuItem("About");
@@ -73,18 +75,42 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(loadRoster))
 		{
+			if (rosterManager != null)
+			{
+				int option;
+				String message = "Open new roster?"
+					+ "\nChanges will not be saved!";
+				String title = "Roster already loaded";
+				option = JOptionPane.showOptionDialog(window, message, title, 
+					JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, null, null);
+				
+				if (option == JOptionPane.YES_OPTION)
+				{
+					rosterManager = new RosterManager();
+					rosterManager.openFile();
+					roster = rosterManager.getRoster();
+					table.clearTable();
+					table = new DataTable(window, roster);
+				}
+
+			}
+			else
+			{
 				rosterManager = new RosterManager();
 				rosterManager.openFile();
 				roster = rosterManager.getRoster();
 				table = new DataTable(window, roster);
+			}
 		}
 		
 		if(e.getSource().equals(addAttendance))
 		{
-			
+			System.out.println("hello");
 			if (rosterManager != null)
 			{
-
+				
+				DateWindow date = new DateWindow();
 				attendanceManager = new AttendanceManager();
 				attendanceManager.openAttendanceFile(roster);
 				table.update();
@@ -92,14 +118,24 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 			}
 			else
 			{
-				// We need a dialog box that roster has not been loaded yet
-				System.out.println("Roster has not been loaded");
+				String message = "Roster must be loaded before attendance"
+					+ "\ndata can be added.";
+				JOptionPane.showMessageDialog(window, message);
 			}
 		}
 		
 		if(e.getSource().equals(saveData))
 		{
-			//Do something
+			if (rosterManager != null)
+			{
+				rosterManager.exportRoster();
+			}
+			else
+			{
+				String message = "Roster must be loaded before"
+					+ "\ndata can be saved.";
+				JOptionPane.showMessageDialog(window, message);
+			}
 		}
 		
 		if(e.getSource().equals(plotData))
@@ -178,24 +214,6 @@ public class MenuBar extends JFrame implements MenuListener, ActionListener{
 					+ "Cameron Woehler\r\n"
 					+ "");
 		}
-		
-	}
-
-	@Override
-	public void menuSelected(MenuEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void menuDeselected(MenuEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void menuCanceled(MenuEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }
