@@ -8,6 +8,14 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 
+ *  The MenuBar class is responsible for unifying all UI elements together.
+ *  It contains global variables used for maintaining databases and JPanels.
+ *  The MenuBar class also contains implementation for menubar elements, which are used to toggle 
+ *  different views. 
+ * 
+ */
 public class MenuBar extends JFrame implements ActionListener{
 	
 	//Menubar items.
@@ -21,7 +29,6 @@ public class MenuBar extends JFrame implements ActionListener{
 	AttendanceManager attendanceManager;
 	ArrayList<ArrayList<String>> roster;
 	DataTable table;
-	String date;
 	
 	//Main window view.
 	MainViewWindow window = null;
@@ -51,6 +58,7 @@ public class MenuBar extends JFrame implements ActionListener{
 		About.addActionListener(this);
 		menuBar.add(About);
 		
+		//Create and add submenu items.
 		loadRoster = new JMenuItem("Load Roster");
 		loadRoster.addActionListener(this);
 		File.add(loadRoster);
@@ -70,10 +78,12 @@ public class MenuBar extends JFrame implements ActionListener{
 		window.setJMenuBar(menuBar);
 	}
 
-
+	/**
+	 * actionPerformed is an overridden method used to provide interactive functionality to menubar button elements.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//Handle roster interaction.
 		if(e.getSource().equals(loadRoster))
 		{
 			if (rosterManager != null)
@@ -104,7 +114,7 @@ public class MenuBar extends JFrame implements ActionListener{
 				table = new DataTable(window, roster);
 			}
 		}
-		
+		 //Handle attendance interaction.
 		if(e.getSource().equals(addAttendance))
 		{
 			if (rosterManager != null)
@@ -119,7 +129,7 @@ public class MenuBar extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(window, message);
 			}
 		}
-		
+		//Handle savedata interaction.
 		if(e.getSource().equals(saveData))
 		{
 			if (rosterManager != null)
@@ -133,7 +143,7 @@ public class MenuBar extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(window, message);
 			}
 		}
-		
+		//handle graph interaction.
 		if(e.getSource().equals(plotData))
 		{
 			//Diagnostics:
@@ -199,7 +209,7 @@ public class MenuBar extends JFrame implements ActionListener{
             plotFrame.setSize(700,500);
             plotFrame.setVisible(true);
 		}
-		
+		//About tab.
 		if(e.getSource().equals(About))
 		{
 			JOptionPane.showMessageDialog(window, "Version 1.0 "
