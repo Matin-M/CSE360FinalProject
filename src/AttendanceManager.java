@@ -19,7 +19,7 @@ public class AttendanceManager extends JFrame {
 		chooser.addChoosableFileFilter(filter);
 	}
 	
-	public void openAttendanceFile(ArrayList<ArrayList<String>> roster)
+	public void openAttendanceFile(ArrayList<ArrayList<String>> roster, String date)
 	{
 		attendanceRoster = roster;
 		chooser.setDialogTitle("Choose a file");
@@ -35,9 +35,9 @@ public class AttendanceManager extends JFrame {
 		    	FileReader fReader;
 		    	BufferedReader bReader;
 		    	final String DELIMITER = ",";
-		    	String line, date;
+		    	String line;
 				String[] tempArr;
-				int loc, i, rowSize, columnSize, tempDate;
+				int loc, i, rowSize, columnSize;
 				ArrayList<String> students = new ArrayList<String>();
 				ArrayList<String[]> visitors = new ArrayList<String[]>();
 				boolean found;
@@ -45,10 +45,10 @@ public class AttendanceManager extends JFrame {
 		    	attendance = chooser.getSelectedFile();
 		    	fReader = new FileReader(attendance);
 				bReader = new BufferedReader(fReader);
-				// Add the new column. We need a date picker for this
-				Random test = new Random();
-				tempDate = test.nextInt(30) + 1;
-				attendanceRoster.get(0).add("November " + tempDate);
+				
+
+
+				attendanceRoster.get(0).add(date);
 				columnSize = attendanceRoster.get(0).size();
 				
 				// All students start at zero minutes of attendance

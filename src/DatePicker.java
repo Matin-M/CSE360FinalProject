@@ -32,12 +32,6 @@ public class DatePicker{
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                	System.err.println("An error with JDatePicker occurred!");
-                    e.printStackTrace();
-                }
                 JFrame frame = new JFrame("Attendance Date");
                 button = new JButton("OK");
                 button.addActionListener(new ActionListener() {
@@ -46,11 +40,10 @@ public class DatePicker{
 						//Environment for managing attendance.
                 		date = getDate();
 						menubar.attendanceManager = new AttendanceManager();
-						menubar.attendanceManager.openAttendanceFile(menubar.roster);
-						System.out.println(date);
+						menubar.attendanceManager.openAttendanceFile(menubar.roster, date);
 						menubar.table.update();
 						frame.dispose();
-					}
+					      }
                 });
                 
                 //Instantiate JPanel for button.
@@ -121,7 +114,7 @@ public class DatePicker{
      * @return
      */
     String getDate() {
-    	return String.valueOf(model.getDay()) + "/" + String.valueOf(model.getMonth());
+    	return String.valueOf(String.valueOf(model.getMonth() + 1) + "/" + model.getDay());
     }
     
 }
