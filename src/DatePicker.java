@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
+
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,8 +17,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
 public class DatePicker{
-	public DatePicker() {
+	UtilDateModel model;
+	JPanel buttonPane;
+	JButton button;
+	String date;
+	public DatePicker(){
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -27,19 +37,35 @@ public class DatePicker{
                 }
 
                 JFrame frame = new JFrame("Attendance Date");
+                button = new JButton("OK");
+                button.addActionListener(new ActionListener() {
+                	@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println(getDate());
+						frame.dispose();
+					}
+                	
+                });
+                JPanel buttonPane = new JPanel();
+                //button.addActionListener(this);
+                buttonPane.setLayout(new FlowLayout());
+                buttonPane.add(button);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(300, 50);
-                frame.add(new TestPane());
+                frame.setSize(300, 300);
+                frame.add(new TestPane(),BorderLayout.PAGE_START);
+                frame.add(buttonPane, BorderLayout.PAGE_END);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
+        
     }
     public class TestPane extends JPanel {
 
         public TestPane() {
-            UtilDateModel model = new UtilDateModel();
+            model = new UtilDateModel();
             Properties p = new Properties();
             p.put("text.today", "Today");
             p.put("text.month", "Month");
@@ -48,6 +74,7 @@ public class DatePicker{
             JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
             setLayout(new GridBagLayout());
             add(datePicker);
+            
         }
 
     }
@@ -72,5 +99,8 @@ public class DatePicker{
             return "";
         }
 
+    }
+    String getDate() {
+    	return String.valueOf(model.getDay()) +  String.valueOf(model.getMonth()) + String.valueOf(model.getYear());
     }
 }
