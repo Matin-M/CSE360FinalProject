@@ -1,7 +1,14 @@
+// Alexander Gaouette - agaouett
+// Matin Massoudi - mmassou1
+// David Ragipi - dragipi
+// Orlando Rios - orios1
+// Cameron Woehler - cwoehler
+// CSE 360 - Section 70606
+// Final Project
+// MainViewWindow.java
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * 

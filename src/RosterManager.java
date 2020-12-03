@@ -1,3 +1,12 @@
+// Alexander Gaouette - agaouett
+// Matin Massoudi - mmassou1
+// David Ragipi - dragipi
+// Orlando Rios - orios1
+// Cameron Woehler - cwoehler
+// CSE 360 - Section 70606
+// Final Project
+// RosterManager.java
+
 import java.io.*;
 import java.util.*;
 import javax.swing.JFileChooser;
