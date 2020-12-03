@@ -1,3 +1,12 @@
+// Alexander Gaouette - agaouett
+// Matin Massoudi - mmassou1
+// David Ragipi - dragipi
+// Orlando Rios - orios1
+// Cameron Woehler - cwoehler
+// CSE 360 - Section 70606
+// Final Project
+// DataPlotPanel.java
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

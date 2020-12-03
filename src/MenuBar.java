@@ -1,12 +1,16 @@
+// Alexander Gaouette - agaouett
+// Matin Massoudi - mmassou1
+// David Ragipi - dragipi
+// Orlando Rios - orios1
+// Cameron Woehler - cwoehler
+// CSE 360 - Section 70606
+// Final Project
+// MenuBar.java
+
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * 

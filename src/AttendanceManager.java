@@ -1,3 +1,13 @@
+// Alexander Gaouette - agaouett
+// Matin Massoudi - mmassou1
+// David Ragipi - dragipi
+// Orlando Rios - orios1
+// Cameron Woehler - cwoehler
+// CSE 360 - Section 70606
+// Final Project
+// AttendanceManager.java
+
+
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -5,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.util.Random;
 
 /**
  * The class AttendanceManager modifies an existing roster of student data 
